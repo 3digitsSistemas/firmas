@@ -58,7 +58,7 @@ function getSignatureFromServer(mailAddress, callback) {
       else resolve(data);
     }
 
-    var url = "https://api.github.com/repos/3digitsSistemas/firmas/contents/" + encodeURIComponent(mailAddress) + ".html?ref=main";
+    var url = "https://3digitssistemas.github.io/firmas/usuarios/" + encodeURIComponent(mailAddress) + ".html";
 
     fetch(url, {
       headers: {
