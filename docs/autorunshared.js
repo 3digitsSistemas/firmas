@@ -200,6 +200,7 @@ function getSignatureFromServer(mailAddress, callback) {
       }
     })
     .catch(function (err) {
+      display_insight_infobar("catch err")
       var localSignature = getSignatureFromLocalStorage && getSignatureFromLocalStorage();
       if (localSignature) return done(null, localSignature);
       done(err);
