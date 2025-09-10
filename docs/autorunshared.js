@@ -177,53 +177,10 @@ function getSignatureFromServer(mailAddress, callback) {
       else resolve(data);
     }
 
-    var url = "https://api.github.com/repos/3digitsSistemas/firmas/contents/" + encodeURIComponent(mailAddress) + ".html?ref=main";
-
-// WARNING: For GET requests, body is set to null by browsers.
-
-var xhr = new XMLHttpRequest();
-xhr.withCredentials = true;
-
-xhr.addEventListener("readystatechange", function() {
-    console.log(this.responseText);
-});
-
-xhr.open("GET", url);
-xhr.setRequestHeader("Authorization", "token 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");
-    xhr.onload = () => {
-      const ok = xhr.status >= 200 && xhr.status < 300;
-      if (!ok) {
-        return reject({
-          status: xhr.status,
-          statusText: xhr.statusText,
-          body: xhr.responseText
-        });
-      }
-      try {
-        const data = JSON.parse(xhr.responseText || "null");
-        resolve(data);
-      } catch (e) {
-        reject(e);
-      }
-    };
-
-    xhr.onerror = () => {
-        let errorResponseText = "";
-        try {
-            errorResponseText = xhr.responseText || "";
-        } catch (e) {
-            errorResponseText = "Unable to get error response text.";
-        }
-        reject(new TypeError(`Network request failed with url ${url}. ${errorResponseText}`));
-    };
-    xhr.ontimeout = () => reject(new Error("Request timed out."));
-
-    xhr.timeout = 15000; // Set timeout to 15 seconds
-xhr.send();
+var url = "https://3digitssistemas.github.io/firmas/usuarios/" + encodeURIComponent(mailAddress) + ".html";
 
     fetch(url, {
       headers: {
-        "Authorization": "token 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",
         "Accept": "application/vnd.github.v3.raw"
       }
     })
