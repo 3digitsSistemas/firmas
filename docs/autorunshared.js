@@ -22,14 +22,14 @@
 // }
 function checkSignature(eventObj) {
   try {
-    const user_info_str = Office.context.roamingSettings.get("user_info");
+    // const user_info_str = Office.context.roamingSettings.get("user_info");
 
-    if (!user_info_str) {
-      // No hay datos: muestra infobar y COMPLETA el evento
-      display_insight_infobar("NO INFO STR");
-      eventObj.completed();
-      return;
-    }
+    // if (!user_info_str) {
+    //   // No hay datos: muestra infobar y COMPLETA el evento
+    //   display_insight_infobar("NO INFO STR");
+    //   eventObj.completed();
+    //   return;
+    // }
 
     // Hay datos: intenta insertar firma
     addTemplateSignature(eventObj);
