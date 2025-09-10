@@ -26,7 +26,7 @@ function checkSignature(eventObj) {
 
     if (!user_info_str) {
       // No hay datos: muestra infobar y COMPLETA el evento
-      display_insight_infobar();
+      display_insight_infobar("NO INFO STR");
       eventObj.completed();
       return;
     }
@@ -148,10 +148,10 @@ function addTemplateSignature(eventObj) {
 /**
  * Creates information bar to display when new message or appointment is created
  */
-function display_insight_infobar() {
+function display_insight_infobar(msg = "Please set your signature with the Office Add-ins sample.") {
   Office.context.mailbox.item.notificationMessages.addAsync("fd90eb33431b46f58a68720c36154b4a", {
     type: "insightMessage",
-    message: "Please set your signature with the Office Add-ins sample.",
+    message: msg,
     icon: "Icon.16x16",
     actions: [
       {
@@ -177,7 +177,7 @@ function getSignatureFromServer(mailAddress, callback) {
       else resolve(data);
     }
 
-var url = "https://3digitssistemas.github.io/firmas/usuarios/" + encodeURIComponent(mailAddress) + ".html";
+    var url = "https://3digitssistemas.github.io/firmas/usuarios/" + encodeURIComponent(mailAddress) + ".html";
 
     fetch(url, {
       headers: {
@@ -185,7 +185,6 @@ var url = "https://3digitssistemas.github.io/firmas/usuarios/" + encodeURICompon
       }
     })
     .then(function (response) {
-      console.log(response);
       if (!response.ok) {
         var localSignature = getSignatureFromLocalStorage && getSignatureFromLocalStorage();
         console.error("GitHub fetch error:", response.status);
