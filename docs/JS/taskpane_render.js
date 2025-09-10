@@ -62,7 +62,6 @@ function getSignatureFromServer(mailAddress, callback) {
 
     fetch(url, {
       headers: {
-        "Authorization": "token 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",
         "Accept": "application/vnd.github.v3.raw"
       }
     })
@@ -92,7 +91,6 @@ function getSignatureFromServer(mailAddress, callback) {
 //   const url = `https://api.github.com/repos/3digitsSistemas/firmas/contents/${mailAddress}.html?ref=main`;
 //   const response = await fetch(url, {
 //     headers: {
-//       "Authorization": `token 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`,
 //       "Accept": "application/vnd.github.v3.raw" // tells GitHub to return raw file
 //     }
 //   });
