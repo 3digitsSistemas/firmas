@@ -129,7 +129,7 @@ function addTemplateSignature(eventObj) {
       }
 
       body.setSignatureAsync(
-        "hola",
+        signatureHtml,
         { coercionType: "html" /*, append: false */ },
         function (asyncResult) {
           if (asyncResult.status === Office.AsyncResultStatus.Failed) {
