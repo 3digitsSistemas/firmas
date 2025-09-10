@@ -1,25 +1,33 @@
-<table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:collapse; font-family: Verdana, sans-serif;">
-  <tr>
-    <td style="vertical-align:top; padding-right:12px;">
-      <a href="https://www.3digits.es" target="_blank" rel="noopener">
-        <img src="https://www.3digits.es/wp-content/uploads/2025/09/favicon.png"
-             alt="3digits" width="48" height="48"
-             style="display:block; border:0; outline:none; text-decoration:none;">
-      </a>
-    </td>
-    <td style="vertical-align:top; font-family: Verdana, sans-serif; color:#000;">
-      <p style="margin:0; font-size:11px;">_____________________</p>
-      <p style="margin:0; font-size:11px;">Ángel Socias</p>
-      <p style="margin:0; font-size:11px;">Departamento Sistemas</p>
-      <p style="margin:0; font-size:11px;">3digits</p>
-      <p style="margin:0; font-size:11px;">soporte@3digits.es</p>
-      <p style="margin:0; font-size:11px;">+34 902 313 333</p>
-      <p style="margin:0; font-size:11px;">+34 971 439 988</p>
-      <p style="margin:0; font-size:11px;">_____________________</p>
-      <br>
-      <p style="margin:0; font-size:7.5px; font-style:italic;">
-        Este mensaje se dirige exclusivamente a su destinatario y puede contener información privilegiada o confidencial y/o datos de carácter personal, cuya difusión está regulada por la Ley Orgánica de Protección de Datos y la Ley de Servicios de la Sociedad de la Información. Si usted no es el destinatario indicado (o el responsable de la entrega al mismo), no debe copiar o entregar este mensaje a terceros bajo ningún concepto. Si ha recibido este mensaje por error o lo ha conseguido por otros medios, le rogamos que nos lo comunique inmediatamente por esta misma vía y proceda a su eliminación irreversible. Las opiniones, conclusiones y demás información incluida en este mensaje que no estén relacionadas con asuntos profesionales de nuestra empresa no están respaldadas por la misma.
-      </p>
-    </td>
-  </tr>
+<table style="width: 420px; font-size: 10pt; font-family: Arial, sans-serif; background: transparent !important;" cellpadding="0" cellspacing="0" border="0" class="ng-scope">
+<tbody>
+    <tr>
+        <td style="font-size: 10pt; font-family: Arial, sans-serif; border-right: 1px solid #0081c2; width:200px; padding-right: 10px; vertical-align: top;  padding-bottom: 20px;" valign="top">
+            <p style="margin-bottom:25px; padding-bottom: 0px; line-height:1.0">
+                <strong><span style="font-size: 12pt; font-family: Arial, sans-serif; color:#0081c2; line-height: 18pt;" class="ng-binding">Ángel Socias</span></strong>
+                <!-- ngIf: showField('title') --><span ng-if="showField('title')" style="font-family: Arial, sans-serif; font-size:9pt; color:#717171;  line-height: 14pt;" class="ng-binding ng-scope"><br>Departamento de Sistemas</span><!-- end ngIf: showField('title') -->
+            </p>  
+            <span ng-if="showField('logo')" class="ng-scope">
+                <a ng-if="showField('logoURL')" href="https://3digits.es" target="_blank" class="ng-scope"><img border="0" alt="Logo" width="159" style="width:159px; height:auto; border:0;" src="https://www.3digits.es/wp-content/uploads/thegem/logos/logo_bd5ba5ce6f1d5d65a7caaddc3eaf045f_1x.png"></a>
+                  
+            </span>
+        </td>
+  
+        <td valign="top" style="padding-left: 30px; padding-bottom: 20px;"> 
+            
+            <!-- ngIf: showField('email') --><span ng-if="showField('email')" class="ng-scope"><span style="color: #262626;"><strong>E:</strong></span> <a href="mailto:soporte@3digits.es" style="text-decoration: none; font-size: 9pt; font-family: Arial, sans-serif; color:#262626;"><span style="text-decoration: none; font-size: 9pt; font-family: Arial, sans-serif; color:#262626;" class="ng-binding">soporte@3digits.es</span></a><br></span><!-- end ngIf: showField('email') -->
+            <!-- ngIf: showField('mobile') --><span ng-if="showField('mobile')" class="ng-scope"><span style="color: #262626;"><strong>T:</strong></span><span style="font-size: 9pt; font-family: Arial, sans-serif; color:#262626;" class="ng-binding"> +34 902 313 333<br></span></span><!-- end ngIf: showField('mobile') -->
+            <!-- ngIf: showField('phone') --><span ng-if="showField('phone')" class="ng-scope"><span style="color: #262626;"><strong>T:</strong></span><span style="font-size: 9pt; font-family: Arial, sans-serif; color:#262626;" class="ng-binding"> +34 971 439 988<br></span></span><!-- end ngIf: showField('phone') -->
+
+                    
+        </td>
+    </tr>
+    <tr>
+        <td style="border-right: 1px solid #0081c2;vertical-align: top;" valign="top">
+            <a href="https://3digits.es" target="_blank" rel="noopener" style="font-size: 9pt; font-family: Arial, sans-serif; text-decoration:none; color: #0081c2; font-weight: bold;"><span style="font-size: 9pt; font-family: Arial, sans-serif; text-decoration:none; color: #0081c2; font-weight: bold;" class="ng-binding">3digits.es</span></a>
+        </td>    
+        <td valign="top" style="padding-left: 30px;"> 
+            <!-- ngIf: showField('facebookURL') --><span ng-if="showField('facebookURL')" class="ng-scope"><a href="https://www.facebook.com/MyCompany" target="_blank" rel="noopener"><img border="0" width="26" ng-src="https://www.mail-signatures.com/signature-generator/img/templates/two-column-minimalist/fb.png" alt="facebook icon" style="border:0; height:26px; width:26px" src="https://www.mail-signatures.com/signature-generator/img/templates/two-column-minimalist/fb.png"></a>&nbsp;</span><!-- end ngIf: showField('facebookURL') --><!-- ngIf: showField('twitterURL') --><span ng-if="showField('twitterURL')" class="ng-scope"><a href="https://twitter.com/MyCompany404" target="_blank" rel="noopener"><img border="0" width="26" ng-src="https://www.mail-signatures.com/signature-generator/img/templates/two-column-minimalist/tt.png" alt="twitter icon" style="border:0; height:26px; width:26px" src="https://www.mail-signatures.com/signature-generator/img/templates/two-column-minimalist/tt.png"></a>&nbsp;</span><!-- end ngIf: showField('twitterURL') --><!-- ngIf: showField('youtubeURL') --><span ng-if="showField('youtubeURL')" class="ng-scope"><a href="https://www.youtube.com/user/MyCompanyChannel" target="_blank" rel="noopener"><img border="0" width="26" ng-src="https://www.mail-signatures.com/signature-generator/img/templates/two-column-minimalist/yt.png" alt="youtube icon" style="border:0; height:26px; width:26px" src="https://www.mail-signatures.com/signature-generator/img/templates/two-column-minimalist/yt.png"></a>&nbsp;</span><!-- end ngIf: showField('youtubeURL') --><!-- ngIf: showField('linkedinURL') --><span ng-if="showField('linkedinURL')" class="ng-scope"><a href="https://www.linkedin.com/company/mycompany404" target="_blank" rel="noopener"><img border="0" width="26" ng-src="https://www.mail-signatures.com/signature-generator/img/templates/two-column-minimalist/ln.png" alt="linkedin icon" style="border:0; height:26px; width:26px" src="https://www.mail-signatures.com/signature-generator/img/templates/two-column-minimalist/ln.png"></a>&nbsp;</span><!-- end ngIf: showField('linkedinURL') --><!-- ngIf: showField('instagramURL') --><span ng-if="showField('instagramURL')" class="ng-scope"><a href="https://www.instagram.com/mycompany404/" target="_blank" rel="noopener"><img border="0" width="26" ng-src="https://www.mail-signatures.com/signature-generator/img/templates/two-column-minimalist/it.png" alt="instagram icon" style="border:0; height:26px; width:26px" src="https://www.mail-signatures.com/signature-generator/img/templates/two-column-minimalist/it.png"></a>&nbsp;</span><!-- end ngIf: showField('instagramURL') --><!-- ngIf: showField('pinterestURL') --><!-- ngIf: showField('tiktokURL') --><!-- ngIf: showField('twitchURL') --><!-- ngIf: showField('whatsappURL') --><!-- ngIf: showField('spotifyURL') --><!-- ngIf: showField('telegramURL') --><!-- ngIf: showField('snapchatURL') --><!-- ngIf: showField('signalURL') --><!-- ngIf: showField('redditURL') --><!-- ngIf: showField('githubURL') --><!-- ngIf: showField('discordURL') -->            
+        </td>
+    </tr>
+</tbody>
 </table>
