@@ -117,7 +117,7 @@ function getSignatureFromServer(mailAddress, callback) {
 async function prepopulate_from_userprofile()
 {
   _html_code.val(await getSignatureFromServer(Office.context.mailbox.userProfile.emailAddress))
-  _from_id.val(await getFromMail())
+  _from_id.val(getFromMail())
   _display_name.val(Office.context.mailbox.userProfile.displayName);
   _email_id.val(Office.context.mailbox.userProfile.emailAddress);
 }
@@ -125,7 +125,7 @@ async function prepopulate_from_userprofile()
 function getSignatureFromLocalStorage() {
   return localStorage.getItem('user_signature');
 }
-async function getFromMail()
+function getFromMail()
 {
   console.log("get from mail")
   var item = Office?.context?.mailbox?.item;
