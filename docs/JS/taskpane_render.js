@@ -117,7 +117,8 @@ function getSignatureFromServer(mailAddress, callback) {
 async function prepopulate_from_userprofile()
 {
   _html_code.val(await getSignatureFromServer(Office.context.mailbox.userProfile.emailAddress))
-  _from_id.val(getFromMail())
+  
+  getFromMail()
   _display_name.val(Office.context.mailbox.userProfile.displayName);
   _email_id.val(Office.context.mailbox.userProfile.emailAddress);
 }
@@ -125,18 +126,19 @@ async function prepopulate_from_userprofile()
 function getSignatureFromLocalStorage() {
   return localStorage.getItem('user_signature');
 }
-function getFromMail()
+async function getFromMail()
 {
   console.log("get from mail")
   var item = Office?.context?.mailbox?.item;
   console.log("item", item)
   if (item?.from && typeof item.from.getAsync === "function") {
     console.log("from function")
-    item.from.getAsync(function (asyncResult) {
+    await item.from.getAsync(function (asyncResult) {
         console.log("start aynsc")
         if (asyncResult.status === Office.AsyncResultStatus.Succeeded &&
           asyncResult.value?.emailAddress) {
               console.log("async if succeeed")
+              _from_id.val(asyncResult.value.emailAddress)
               console.log(asyncResult.value.emailAddress)
           return asyncResult.value.emailAddress
         } else {
