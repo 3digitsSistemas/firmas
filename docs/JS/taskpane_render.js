@@ -127,7 +127,9 @@ function getSignatureFromLocalStorage() {
 }
 async function getFromMail()
 {
+  console.log("get from mail")
   var item = Office?.context?.mailbox?.item;
+  console.log("item", item)
   if (item?.from && typeof item.from.getAsync === "function") {
       item.from.getAsync(function (asyncResult) {
         if (asyncResult.status === Office.AsyncResultStatus.Succeeded &&
