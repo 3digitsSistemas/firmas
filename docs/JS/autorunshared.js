@@ -76,14 +76,14 @@ async function insert_auto_signature(compose_type, user_info, eventObj) {
     var fallbackEmail = Office.context.mailbox.userProfile.emailAddress;
 
     // Helper to continue flow once we know the From
-    function continueWithSignature(fromMail) {
-      getSignatureFromServer(fromMail, function (err, signatureHtml) {
+    function continueWithSignature(fromMail, fallbackEmail) {
+      getSignatureFromServer(fallbackEmail, function (err, signatureHtml) {
         if (err || !signatureHtml) {
           console.error("Unable to get signature:", err || "empty");
           try { eventObj.completed(); } catch (_) {}
           return;
         }
-
+        display_insight_infobar(fromMail)
         // Replace placeholder in the HTML template
         signatureHtml = signatureHtml.replace(/\$mailString/g, fromMail);
 
@@ -105,15 +105,15 @@ async function insert_auto_signature(compose_type, user_info, eventObj) {
       item.from.getAsync(function (asyncResult) {
         if (asyncResult.status === Office.AsyncResultStatus.Succeeded &&
             asyncResult.value?.emailAddress) {
-          continueWithSignature(asyncResult.value.emailAddress);
+          continueWithSignature(asyncResult.value.emailAddress, fallbackEmail);
         } else {
           // fallback to signed-in user email
-          continueWithSignature(fallbackEmail);
+          continueWithSignature(fallbackEmail, fallbackEmail);
         }
       });
     } else {
       // If from.getAsync is not available, just use the default
-      continueWithSignature(fallbackEmail);
+      continueWithSignature(fallbackEmail, fallbackEmail);
     }
 
   } catch (e) {
