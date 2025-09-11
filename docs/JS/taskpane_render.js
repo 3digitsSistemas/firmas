@@ -131,11 +131,16 @@ async function getFromMail()
   var item = Office?.context?.mailbox?.item;
   console.log("item", item)
   if (item?.from && typeof item.from.getAsync === "function") {
-      item.from.getAsync(function (asyncResult) {
+    console.log("from function")
+    item.from.getAsync(function (asyncResult) {
+        console.log("start aynsc")
         if (asyncResult.status === Office.AsyncResultStatus.Succeeded &&
-            asyncResult.value?.emailAddress) {
+          asyncResult.value?.emailAddress) {
+              console.log("async if succeeed")
+              console.log(asyncResult.value.emailAddress)
           return asyncResult.value.emailAddress
         } else {
+          console.log("FAllback")
           // fallback to signed-in user email
           return "fallback"
         }
