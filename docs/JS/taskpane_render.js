@@ -23,6 +23,7 @@ function on_initialization_complete()
       _display_name = $("input#display_name");
       _email_id = $("input#email_id");
       _html_code = $("textarea#html_code");
+      _from_id = $("input#from_id");
 
       prepopulate_from_userprofile();
 		}
@@ -42,9 +43,11 @@ async function addTemplateSignature(signatureDetails, eventObj, signatureImageBa
       }
     );
 }
+
 function inserta_signature() {
   addTemplateSignature()
 }
+
 function getSignatureFromServer(mailAddress, callback) {
   // normalize cb
   var cb = (typeof callback === "function") ? callback : null;
@@ -114,6 +117,7 @@ function getSignatureFromServer(mailAddress, callback) {
 async function prepopulate_from_userprofile()
 {
   _html_code.val(await getSignatureFromServer(Office.context.mailbox.userProfile.emailAddress))
+  _from_id.val(await getFromMail())
   _display_name.val(Office.context.mailbox.userProfile.displayName);
   _email_id.val(Office.context.mailbox.userProfile.emailAddress);
 }
@@ -121,7 +125,21 @@ async function prepopulate_from_userprofile()
 function getSignatureFromLocalStorage() {
   return localStorage.getItem('user_signature');
 }
-
+async function getFromMail()
+{
+  var item = Office?.context?.mailbox?.item;
+  if (item?.from && typeof item.from.getAsync === "function") {
+      item.from.getAsync(function (asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Succeeded &&
+            asyncResult.value?.emailAddress) {
+          return asyncResult.value.emailAddress
+        } else {
+          // fallback to signed-in user email
+          return "fallback"
+        }
+      });
+    }
+}
 function navigate_to_taskpane_assignsignature()
 {
   window.location.href = 'assignsignature.html';
