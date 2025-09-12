@@ -145,7 +145,7 @@ function addTemplateSignature(eventObj) {
       }
 
       body.setSignatureAsync(
-        "signatureHtml",
+        signatureHtml,
         { coercionType: "html" /*, append: false */ },
         function (asyncResult) {
           if (asyncResult.status === Office.AsyncResultStatus.Failed) {
@@ -156,6 +156,7 @@ function addTemplateSignature(eventObj) {
       );
     });
   } catch (e) {
+    display_insight_infobar("ERROR 1")
     console.error("addTemplateSignature exception:", e);
     try { eventObj.completed(); } catch (_) {}
   }
