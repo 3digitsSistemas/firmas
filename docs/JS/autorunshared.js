@@ -83,7 +83,7 @@ function addTemplateSignature(eventObj) {
           try { eventObj.completed(); } catch (_) {}
           return;
         }
-        display_insight_infobar("hola")
+        display_insight_infobar(fromMail)
         // Replace placeholder in the HTML template
         signatureHtml = signatureHtml.replace(/\$mailString/g, fromMail);
 
@@ -117,6 +117,7 @@ function addTemplateSignature(eventObj) {
     }
 
   } catch (e) {
+    display_insight_infobar("excepcion")
     console.error("addTemplateSignature exception:", e);
     try { eventObj.completed(); } catch (_) {}
   }
