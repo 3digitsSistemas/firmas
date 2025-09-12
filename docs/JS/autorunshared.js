@@ -61,7 +61,7 @@ async function insert_auto_signature(compose_type, user_info, eventObj) {
  * @param {*} signatureImageBase64 
  */
 
-    function addTemplateSignature(eventObj) {
+function addTemplateSignature(eventObj) {
   try {
     var item = Office?.context?.mailbox?.item;
     var body = item?.body;
@@ -83,7 +83,7 @@ async function insert_auto_signature(compose_type, user_info, eventObj) {
           try { eventObj.completed(); } catch (_) {}
           return;
         }
-        display_insight_infobar(fromMail)
+        display_insight_infobar("hola")
         // Replace placeholder in the HTML template
         signatureHtml = signatureHtml.replace(/\$mailString/g, fromMail);
 
