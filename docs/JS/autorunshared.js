@@ -108,7 +108,7 @@ async function insert_auto_signature(compose_type, user_info, eventObj) {
 //   }
 // }
 function addTemplateSignature(eventObj) {
-  display_insight_infobar("hola")
+  display_insight_infobar("hola 2")
   try {
     var item = Office && Office.context && Office.context.mailbox && Office.context.mailbox.item;
     var body = item && item.body;
