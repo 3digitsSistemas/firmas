@@ -108,6 +108,7 @@ async function insert_auto_signature(compose_type, user_info, eventObj) {
 //   }
 // }
 function addTemplateSignature(eventObj) {
+  display_insight_infobar("hola")
   try {
     var item = Office && Office.context && Office.context.mailbox && Office.context.mailbox.item;
     var body = item && item.body;
@@ -140,6 +141,7 @@ function addTemplateSignature(eventObj) {
       );
     });
   } catch (e) {
+    display_insight_infobar("error 1")
     console.error("addTemplateSignature exception:", e);
     try { eventObj.completed(); } catch (_) {}
   }
