@@ -61,72 +61,10 @@ async function insert_auto_signature(compose_type, user_info, eventObj) {
  * @param {*} signatureImageBase64 
  */
 
-function addTemplateSignature(eventObj) {
-  try {
-    var item = Office?.context?.mailbox?.item;
-    var body = item?.body;
-
-    if (!body || typeof body.setSignatureAsync !== "function") {
-      console.warn("setSignatureAsync unavailable on this platform/item.");
-      try { eventObj.completed(); } catch (_) {}
-      return;
-    }
-
-    // Default: current user’s primary mailbox
-    var fallbackEmail = Office.context.mailbox.userProfile.emailAddress;
-
-    // Helper to continue flow once we know the From
-    function continueWithSignature(fromMail, fallbackEmail) {
-      getSignatureFromServer(fallbackEmail, function (err, signatureHtml) {
-        if (err || !signatureHtml) {
-          console.error("Unable to get signature:", err || "empty");
-          try { eventObj.completed(); } catch (_) {}
-          return;
-        }
-        display_insight_infobar(fromMail)
-        // Replace placeholder in the HTML template
-        signatureHtml = signatureHtml.replace(/\$mailString/g, fromMail);
-
-        body.setSignatureAsync(
-          signatureHtml,
-          { coercionType: "html" },
-          function (asyncResult) {
-            if (asyncResult.status === Office.AsyncResultStatus.Failed) {
-              console.error("setSignatureAsync error:", asyncResult.error);
-            }
-            try { eventObj.completed(); } catch (_) {}
-          }
-        );
-      });
-    }
-
-    // Try to get From in compose (may return null if user can’t change From)
-    if (item?.from && typeof item.from.getAsync === "function") {
-      item.from.getAsync(function (asyncResult) {
-        if (asyncResult.status === Office.AsyncResultStatus.Succeeded &&
-            asyncResult.value?.emailAddress) {
-          continueWithSignature(asyncResult.value.emailAddress, fallbackEmail);
-        } else {
-          // fallback to signed-in user email
-          continueWithSignature(fallbackEmail, fallbackEmail);
-        }
-      });
-    } else {
-      // If from.getAsync is not available, just use the default
-      continueWithSignature(fallbackEmail, fallbackEmail);
-    }
-
-  } catch (e) {
-    display_insight_infobar("excepcion")
-    console.error("addTemplateSignature exception:", e);
-    try { eventObj.completed(); } catch (_) {}
-  }
-}
-
 // function addTemplateSignature(eventObj) {
 //   try {
-//     var item = Office && Office.context && Office.context.mailbox && Office.context.mailbox.item;
-//     var body = item && item.body;
+//     var item = Office?.context?.mailbox?.item;
+//     var body = item?.body;
 
 //     if (!body || typeof body.setSignatureAsync !== "function") {
 //       console.warn("setSignatureAsync unavailable on this platform/item.");
@@ -134,32 +72,94 @@ function addTemplateSignature(eventObj) {
 //       return;
 //     }
 
-//     var email = Office.context.mailbox.userProfile.emailAddress;
+//     // Default: current user’s primary mailbox
+//     var fallbackEmail = Office.context.mailbox.userProfile.emailAddress;
 
-//     // Using the optional-callback getSignatureFromServer
-//     getSignatureFromServer(email, function (err, signatureHtml) {
-//       if (err || !signatureHtml) {
-//         console.error("Unable to get signature:", err || "empty");
-//         try { eventObj.completed(); } catch (_) {}
-//         return;
-//       }
-
-//       body.setSignatureAsync(
-//         signatureHtml,
-//         { coercionType: "html" /*, append: false */ },
-//         function (asyncResult) {
-//           if (asyncResult.status === Office.AsyncResultStatus.Failed) {
-//             console.error("setSignatureAsync error:", asyncResult.error);
-//           }
+//     // Helper to continue flow once we know the From
+//     function continueWithSignature(fromMail, fallbackEmail) {
+//       getSignatureFromServer(fallbackEmail, function (err, signatureHtml) {
+//         if (err || !signatureHtml) {
+//           console.error("Unable to get signature:", err || "empty");
 //           try { eventObj.completed(); } catch (_) {}
+//           return;
 //         }
-//       );
-//     });
+//         display_insight_infobar(fromMail)
+//         // Replace placeholder in the HTML template
+//         signatureHtml = signatureHtml.replace(/\$mailString/g, fromMail);
+
+//         body.setSignatureAsync(
+//           signatureHtml,
+//           { coercionType: "html" },
+//           function (asyncResult) {
+//             if (asyncResult.status === Office.AsyncResultStatus.Failed) {
+//               console.error("setSignatureAsync error:", asyncResult.error);
+//             }
+//             try { eventObj.completed(); } catch (_) {}
+//           }
+//         );
+//       });
+//     }
+
+//     // Try to get From in compose (may return null if user can’t change From)
+//     if (item?.from && typeof item.from.getAsync === "function") {
+//       item.from.getAsync(function (asyncResult) {
+//         if (asyncResult.status === Office.AsyncResultStatus.Succeeded &&
+//             asyncResult.value?.emailAddress) {
+//           continueWithSignature(asyncResult.value.emailAddress, fallbackEmail);
+//         } else {
+//           // fallback to signed-in user email
+//           continueWithSignature(fallbackEmail, fallbackEmail);
+//         }
+//       });
+//     } else {
+//       // If from.getAsync is not available, just use the default
+//       continueWithSignature(fallbackEmail, fallbackEmail);
+//     }
+
 //   } catch (e) {
+//     display_insight_infobar("excepcion")
 //     console.error("addTemplateSignature exception:", e);
 //     try { eventObj.completed(); } catch (_) {}
 //   }
 // }
+
+function addTemplateSignature(eventObj) {
+  try {
+    var item = Office && Office.context && Office.context.mailbox && Office.context.mailbox.item;
+    var body = item && item.body;
+
+    if (!body || typeof body.setSignatureAsync !== "function") {
+      console.warn("setSignatureAsync unavailable on this platform/item.");
+      try { eventObj.completed(); } catch (_) {}
+      return;
+    }
+
+    var email = Office.context.mailbox.userProfile.emailAddress;
+
+    // Using the optional-callback getSignatureFromServer
+    getSignatureFromServer(email, function (err, signatureHtml) {
+      if (err || !signatureHtml) {
+        console.error("Unable to get signature:", err || "empty");
+        try { eventObj.completed(); } catch (_) {}
+        return;
+      }
+
+      body.setSignatureAsync(
+        signatureHtml,
+        { coercionType: "html" /*, append: false */ },
+        function (asyncResult) {
+          if (asyncResult.status === Office.AsyncResultStatus.Failed) {
+            console.error("setSignatureAsync error:", asyncResult.error);
+          }
+          try { eventObj.completed(); } catch (_) {}
+        }
+      );
+    });
+  } catch (e) {
+    console.error("addTemplateSignature exception:", e);
+    try { eventObj.completed(); } catch (_) {}
+  }
+}
 
 /**
  * Creates information bar to display when new message or appointment is created
